@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NexGen Headgear Fusion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Exo+2:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f3ea;
+  --bg2:#fffaf3;
+  --surface:rgba(255,255,255,.78);
+  --surface-strong:rgba(255,255,255,.92);
+  --text:#1d1713;
+  --muted:#6d6358;
+  --line:rgba(20,20,20,.08);
+  --yellow:#f1cf27;
+  --orange:#ef7f22;
+  --coral:#ef5b47;
+  --rose:#97273f;
+  --olive:#63613c;
+  --navy:#1f365f;
+  --dark:#101010;
+  --success:#227a4e;
+  --radius:28px;
+  --radius-sm:18px;
+  --shadow:0 18px 55px rgba(0,0,0,.12);
+  --shadow-lg:0 28px 80px rgba(0,0,0,.18);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Exo 2',sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 12% 10%, rgba(241,207,39,.22), transparent 20%),
+    radial-gradient(circle at 88% 10%, rgba(239,91,71,.18), transparent 25%),
+    radial-gradient(circle at 80% 80%, rgba(31,54,95,.08), transparent 25%),
+    linear-gradient(180deg,#fffaf3 0%, #f7f2e8 45%, #f3eee5 100%);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+body.cursor-active, body.cursor-active a, body.cursor-active button{cursor:none}
+img,video{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+button{font:inherit}
+.container{width:min(1260px,calc(100% - 28px));margin-inline:auto}
+.glass{
+  background:var(--surface);
+  border:1px solid rgba(255,255,255,.68);
+  backdrop-filter:blur(16px) saturate(1.2);
+  -webkit-backdrop-filter:blur(16px) saturate(1.2);
+  box-shadow:var(--shadow);
+}
+.section{padding:96px 0 0;scroll-margin-top:110px}
+.section-head{
+  display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:28px;
+}
+.section-head h2{
+  font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.8rem);line-height:.95;letter-spacing:-.04em;
+}
+.section-head p{max-width:580px;color:var(--muted);line-height:1.8}
+.kicker{
+  display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;
+  background:rgba(255,255,255,.14);color:#fff;font-size:.82rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+}
+.kicker::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 6px rgba(241,207,39,.18)}
+.badge-verify{
+  display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:rgba(34,122,78,.1);
+  color:var(--success);font-size:.76rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;border:1px solid rgba(34,122,78,.18)
+}
+.badge-verify::before{content:"✓";display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--success);color:#fff;font-size:.75rem}
+.nav-wrap{position:sticky;top:12px;z-index:80;padding-top:12px}
+.nav{
+  width:min(1260px,calc(100% - 24px));margin-inline:auto;padding:14px 18px;border-radius:24px;
+  display:flex;justify-content:space-between;align-items:center;gap:20px;
+}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.brand img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:3px solid rgba(16,16,16,.08)}
+.brand-text strong{display:block;font-family:'Rajdhani',sans-serif;font-size:1.5rem;line-height:1}
+.brand-text span{display:block;font-size:.84rem;color:var(--muted);margin-top:4px}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{font-weight:800;position:relative;padding:6px 0}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:linear-gradient(90deg,var(--yellow),var(--coral));transition:.25s ease}
+.nav-links a:hover::after{width:100%}
+.nav-actions{display:flex;gap:12px;align-items:center}
+.btn,.btn-lite,.mini-btn,.filter-pill,.persona-btn,.color-dot,.pay-chip{transition:.28s ease;cursor:pointer}
+.btn,.btn-lite{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:900;border:none;
+}
+.btn{background:linear-gradient(135deg,var(--yellow),#ffe177);color:var(--dark);box-shadow:0 14px 30px rgba(241,207,39,.24)}
+.btn:hover,.btn-lite:hover,.mini-btn:hover{transform:translateY(-2px)}
+.btn-lite{background:var(--dark);color:#fff}
+.mobile-shop{display:none}
+.hero{
+  width:min(1260px,calc(100% - 24px));margin:22px auto 0;min-height:820px;border-radius:42px;overflow:hidden;position:relative;
+  background:
+   linear-gradient(110deg, rgba(16,16,16,.78) 0%, rgba(16,16,16,.58) 34%, rgba(16,16,16,.15) 75%),
+   url('page-snapshot.png') center/cover no-repeat;
+  box-shadow:var(--shadow-lg);
+}
+.hero::before{
+  content:"";position:absolute;inset:0;background:
+    linear-gradient(180deg, rgba(241,207,39,.06), rgba(239,91,71,.16)),
+    radial-gradient(circle at 85% 15%, rgba(255,210,0,.25), transparent 18%);
+}
+.grid-overlay{position:absolute;inset:0;opacity:.12;background-image:linear-gradient(rgba(255,255,255,.55) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.55) 1px,transparent 1px);background-size:42px 42px;mix-blend-mode:soft-light}
+.hero-inner{position:relative;z-index:2;height:100%;padding:48px;display:grid;grid-template-columns:1.06fr .94fr;gap:30px;align-items:end}
+.hero-copy{color:#fff;align-self:end}
+.hero-copy h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,6vw,5.7rem);line-height:.92;letter-spacing:-.05em;margin:18px 0}
+.hero-copy h1 em{font-style:normal;color:#ffe37b}
+.hero-copy p{max-width:650px;line-height:1.88;font-size:1.03rem;color:rgba(255,255,255,.9)}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:30px}
+.stat{padding:18px;border-radius:20px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.12)}
+.stat strong{display:block;font-family:'Rajdhani',sans-serif;font-size:1.8rem;line-height:1;margin-bottom:6px}
+.stat span{font-size:.9rem;color:rgba(255,255,255,.76)}
+.hero-side{justify-self:end;width:min(470px,100%);padding:22px;border-radius:32px;background:rgba(255,255,255,.9);box-shadow:var(--shadow)}
+.feature-card{border-radius:26px;overflow:hidden;position:relative;border:1px solid rgba(16,16,16,.08)}
+.feature-card img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.feature-ribbon{position:absolute;top:14px;left:14px;padding:10px 14px;border-radius:999px;background:rgba(16,16,16,.82);color:#fff;font-weight:900;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}
+.hero-side-head{display:flex;align-items:center;gap:12px;margin:18px 0 14px}
+.hero-side-head img{width:60px;height:60px;border-radius:50%;object-fit:cover;border:3px solid rgba(16,16,16,.08)}
+.hero-side-head h3{font-family:'Rajdhani',sans-serif;font-size:1.6rem;line-height:1}
+.hero-side-head p{font-size:.86rem;color:var(--muted);margin-top:4px}
+.hero-side .desc{line-height:1.8;color:#413932;margin-bottom:14px}
+.quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.quick-item{padding:16px;border-radius:20px;background:#fff;border:1px solid rgba(16,16,16,.08)}
+.quick-item strong{display:block;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.quick-item span{font-weight:800;line-height:1.45}
+.marquee-wrap{width:min(1260px,calc(100% - 24px));margin:18px auto 0;overflow:hidden;border-radius:24px;border:1px solid rgba(16,16,16,.06);background:rgba(255,255,255,.58)}
+.marquee-track{display:flex;width:max-content;animation:marquee 26s linear infinite;padding:15px 0}
+.marquee-item{display:flex;align-items:center;gap:14px;padding:0 28px;font-weight:900;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:#40372f}
+.marquee-item b{color:var(--coral)}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.about-grid,.video-grid,.collection-grid,.contact-grid,.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.panel{padding:28px;border-radius:32px}
+.panel p{color:var(--muted);line-height:1.85}
+.brand-points{display:grid;gap:14px;margin-top:18px}
+.point{padding:16px 18px;border-radius:20px;background:#fff;border:1px solid rgba(16,16,16,.08)}
+.point strong{display:block;font-size:.92rem;margin-bottom:6px}
+.point span{color:var(--muted);line-height:1.7}
+.snapshot{border-radius:26px;overflow:hidden;border:1px solid rgba(16,16,16,.08);background:#fff}
+.snapshot img{width:100%;height:100%;object-fit:cover}
+.video-frame{border-radius:26px;overflow:hidden;background:#000;border:1px solid rgba(16,16,16,.1)}
+.video-frame video{width:100%;min-height:460px;object-fit:cover}
+.side-shots{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+.side-shot{border-radius:22px;overflow:hidden;background:#fff;border:1px solid rgba(16,16,16,.08)}
+.side-shot img{width:100%;height:220px;object-fit:cover}
+.side-shot span{display:block;padding:14px;font-weight:900}
+.collection-shell{padding:28px;border-radius:32px}
+.filter-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:26px}
+.filter-pill{padding:12px 18px;border-radius:999px;background:#fff;border:1px solid rgba(16,16,16,.08);font-weight:900}
+.filter-pill.active,.filter-pill:hover{background:var(--dark);color:#fff}
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.product-card{border-radius:28px;overflow:hidden;background:#fff;border:1px solid rgba(16,16,16,.08);box-shadow:0 14px 26px rgba(0,0,0,.07);transition:.35s ease;display:flex;flex-direction:column}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 24px 40px rgba(0,0,0,.12)}
+.product-media{position:relative;overflow:hidden}
+.product-media img{width:100%;aspect-ratio:1/1;object-fit:cover;transition:.35s ease}
+.product-card:hover .product-media img{transform:scale(1.04)}
+.card-badge{position:absolute;top:14px;left:14px;padding:8px 12px;border-radius:999px;font-size:.74rem;font-weight:900;letter-spacing:.04em}
+.cozy{background:rgba(241,207,39,.2);color:#5a4c00}
+.limited{background:rgba(151,39,63,.14);color:#7f2237}
+.studio{background:rgba(99,97,60,.15);color:#4c4a27}
+.product-body{padding:20px;display:flex;flex-direction:column;flex:1}
+.product-body h3{font-size:1.14rem;margin-bottom:8px}
+.product-body p{color:var(--muted);line-height:1.72;font-size:.94rem}
+.product-meta{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:12px}
+.product-price{font-family:'Playfair Display',serif;font-size:1.22rem;color:var(--coral)}
+.card-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.mini-btn{display:inline-flex;align-items:center;justify-content:center;padding:11px 16px;border-radius:999px;font-weight:900;border:1px solid rgba(16,16,16,.08);background:#f7f3ea}
+.mini-btn.primary{background:var(--dark);border-color:var(--dark);color:#fff}
+.payment-wrap{padding:28px;border-radius:32px;margin-top:26px}
+.payment-top{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:18px}
+.payment-top h3{font-family:'Rajdhani',sans-serif;font-size:1.8rem}
+.payment-top p{color:var(--muted)}
+.payment-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.pay-chip{padding:18px 14px;border-radius:20px;background:#fff;border:1px solid rgba(16,16,16,.08);display:grid;place-items:center;gap:10px;min-height:110px;box-shadow:0 8px 20px rgba(0,0,0,.04)}
+.pay-chip:hover{transform:translateY(-4px);box-shadow:0 16px 30px rgba(0,0,0,.08)}
+.pay-logo{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:1.05rem;font-weight:900;color:#fff}
+.pay-bkash{background:linear-gradient(135deg,#e2136e,#ff6ca6)}
+.pay-nagad{background:linear-gradient(135deg,#f97316,#ef4444)}
+.pay-upay{background:linear-gradient(135deg,#ffbf00,#ffda44);color:#422900}
+.pay-visa{background:linear-gradient(135deg,#1434cb,#3c5fff)}
+.pay-master{background:linear-gradient(135deg,#eb001b,#f79e1b)}
+.pay-chip span{font-weight:900;letter-spacing:.06em;text-transform:uppercase;font-size:.84rem}
+.verify-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.verify-card{padding:18px;border-radius:22px;background:#fff;border:1px solid rgba(16,16,16,.08)}
+.verify-card strong{display:block;font-size:.82rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+.verify-card span{font-weight:900;line-height:1.5}
+.view-page-card{padding:30px;border-radius:34px;display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:stretch;margin-top:26px;background:linear-gradient(135deg,rgba(16,16,16,.96),rgba(31,54,95,.9));color:#fff;overflow:hidden;position:relative}
+.view-page-card::before{content:'';position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(241,207,39,.22),transparent 70%)}
+.view-page-copy,.view-page-visuals{position:relative;z-index:1}
+.view-page-copy h3{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.4vw,3.2rem);line-height:.95;margin:14px 0 12px}
+.view-page-copy p{color:rgba(255,255,255,.84);line-height:1.85;max-width:620px}
+.view-page-points{display:grid;gap:12px;margin:22px 0}
+.view-page-points div{padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);font-weight:800}
+.view-page-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 24px;border-radius:999px;background:linear-gradient(135deg,var(--yellow),#ffe177);color:var(--dark);font-weight:900;box-shadow:0 16px 34px rgba(241,207,39,.24)}
+.view-page-visuals{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.view-shot{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:12px;border-radius:24px;backdrop-filter:blur(8px)}
+.view-shot img{width:100%;height:260px;object-fit:cover;border-radius:18px;display:block}
+.view-shot span{display:block;padding:12px 4px 2px;font-weight:900;color:#fff}
+.contact-box h2{font-family:'Playfair Display',serif;font-size:clamp(2.1rem,3.8vw,3.3rem);line-height:.95;letter-spacing:-.04em;margin-bottom:16px}
+.contact-box p{color:var(--muted);line-height:1.82;margin-bottom:24px}
+.contact-detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.contact-chip{padding:18px;border-radius:22px;background:#fff;border:1px solid rgba(16,16,16,.08)}
+.contact-chip span{display:block;font-size:.84rem;color:var(--muted);font-weight:800;margin-bottom:8px}
+.contact-chip strong{font-size:1rem}
+.cta-panel{position:relative;overflow:hidden;min-height:100%;border-radius:34px;padding:32px;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(135deg,rgba(16,16,16,.6),rgba(16,16,16,.28)), url('cozy-yellow.jpg') center/cover no-repeat}
+.cta-panel::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(241,207,39,.04), rgba(239,91,71,.18))}
+.cta-panel>*{position:relative;z-index:2}
+.cta-panel h3{font-family:'Playfair Display',serif;font-size:2.2rem;line-height:.98;margin-bottom:12px}
+.cta-panel p{line-height:1.84;color:rgba(255,255,255,.88);margin-bottom:22px}
+.cta-actions{display:flex;gap:12px;flex-wrap:wrap}
+.cta-actions a{display:inline-flex;align-items:center;justify-content:center;padding:14px 18px;border-radius:999px;font-weight:900}
+.cta-actions a:first-child{background:var(--yellow);color:var(--dark)}
+.cta-actions a:last-child{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.18)}
+.footer{padding:38px 0 36px}
+.footer-wrap{width:min(1260px,calc(100% - 24px));margin:0 auto;padding:22px 24px;border-radius:26px;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:22px;align-items:start}
+.footer-brand{display:flex;gap:14px;align-items:flex-start}
+.footer-brand img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:3px solid rgba(16,16,16,.08)}
+.footer-brand h4{font-family:'Rajdhani',sans-serif;font-size:1.55rem;line-height:1}
+.footer-brand p,.footer-col p{color:var(--muted);line-height:1.75;font-size:.94rem}
+.footer-col strong{display:block;font-size:.82rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:10px}
+.footer-col p a{display:inline-block;padding:4px 0;font-weight:800;transition:.22s ease}
+.footer-col p a:hover{color:var(--coral);transform:translateX(2px)}
+.footer-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.footer-small{font-size:.9rem;color:var(--muted);margin-top:12px}
+.footer-note{width:min(1260px,calc(100% - 24px));margin:12px auto 0;text-align:center;color:var(--muted);font-size:.88rem}
+.swatch-row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;padding:10px 12px;border-radius:16px;background:#faf7f1;border:1px solid rgba(16,16,16,.06)}
+.swatch-row strong{font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tiny-swatches{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.tiny-swatch{width:16px;height:16px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(16,16,16,.1)}
+.sticky-panel{position:sticky;top:96px}
+.payment-strip-frame{margin:18px 0 22px;border-radius:24px;overflow:hidden;background:#fff;border:1px solid rgba(16,16,16,.08);box-shadow:0 10px 24px rgba(0,0,0,.05)}
+.payment-strip-frame img{width:100%;height:auto;display:block}
+.footer-payment-image{margin-top:16px;border-radius:18px;overflow:hidden;border:1px solid rgba(16,16,16,.08);background:#fff}
+.footer-payment-image img{width:100%;height:auto;display:block}
+/* detail page */
+.detail-page{padding:106px 0 72px}
+.back-link{display:inline-flex;align-items:center;gap:8px;background:none;border:none;color:var(--muted);font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:24px}
+.back-link:hover{color:var(--coral)}
+.preview-shell{padding:22px;border-radius:32px;position:relative;overflow:hidden}
+.preview-stage{position:relative;min-height:660px;border-radius:28px;overflow:hidden;border:1px solid rgba(16,16,16,.08);background:radial-gradient(circle at top left, rgba(241,207,39,.12), transparent 24%), linear-gradient(180deg,#fffaf3 0%, #f3ede4 100%)}
+.preview-base{width:100%;height:100%;padding:24px;display:flex;align-items:center;justify-content:center}
+.preview-base img{width:100%;max-height:610px;object-fit:contain;filter:drop-shadow(0 28px 26px rgba(0,0,0,.14))}
+.ai-canvas-wrap{position:absolute;inset:0;display:none;align-items:center;justify-content:center;padding:16px}
+.ai-canvas-wrap.active{display:flex}
+#aiPreviewCanvas{width:100%;height:auto;max-height:620px;border-radius:24px;background:transparent}
+.ai-tag{position:absolute;right:18px;bottom:18px;padding:8px 16px;border-radius:999px;background:rgba(34,122,78,.94);color:#fff;font-weight:900;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;display:none}
+.ai-tag.active{display:inline-flex}
+.loading-overlay{position:absolute;inset:0;background:rgba(255,250,243,.9);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;z-index:4}
+.loading-overlay.active{display:flex}
+.spinner{width:56px;height:56px;border-radius:50%;border:4px solid rgba(0,0,0,.08);border-top-color:var(--coral);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-overlay strong{font-family:'Playfair Display',serif;font-size:1.18rem}.loading-overlay span{color:var(--muted)}
+.preview-note{margin-top:14px;padding:14px 16px;border-radius:18px;background:rgba(31,54,95,.06);border:1px solid rgba(31,54,95,.1);color:var(--navy);line-height:1.72;font-size:.92rem}
+.detail-info{padding:28px;border-radius:32px}
+.detail-category{display:inline-flex;padding:8px 12px;border-radius:999px;background:rgba(31,54,95,.08);color:var(--navy);font-weight:900;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+.detail-info h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.25rem);line-height:.95;letter-spacing:-.04em;margin-bottom:10px}
+.detail-price{font-family:'Playfair Display',serif;font-size:2.05rem;color:var(--coral);margin-bottom:14px}
+.detail-desc{color:var(--muted);line-height:1.84;margin-bottom:20px}
+.option-group{margin-bottom:24px}
+.option-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.option-top strong{font-size:.76rem;text-transform:uppercase;letter-spacing:.14em}
+.option-top span{font-weight:900;color:var(--coral)}
+.color-row{display:flex;flex-wrap:wrap;gap:12px}
+.color-dot{width:46px;height:46px;border-radius:50%;border:3px solid transparent;box-shadow:0 4px 12px rgba(0,0,0,.15);position:relative}
+.color-dot.active{transform:scale(1.12);border-color:var(--dark)}
+.color-dot.active::after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-weight:900;text-shadow:0 1px 3px rgba(0,0,0,.45)}
+.persona-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.persona-btn{padding:16px 10px;border-radius:20px;text-align:center;background:rgba(255,255,255,.85);border:2px solid rgba(16,16,16,.08)}
+.persona-btn:hover{border-color:rgba(241,207,39,.7);background:rgba(241,207,39,.08)}
+.persona-btn.active{background:rgba(31,54,95,.08);border-color:var(--navy)}
+.persona-btn .icon{font-size:1.55rem;margin-bottom:6px}
+.persona-btn .label{font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.persona-btn.active .label{color:var(--navy)}
+.combo-box{padding:16px 18px;border-radius:18px;background:rgba(31,54,95,.06);border:1px solid rgba(31,54,95,.1);color:var(--navy);line-height:1.7;font-weight:700;min-height:54px;margin-bottom:14px}
+.ai-generate{width:100%;padding:16px 18px;border:none;border-radius:18px;background:linear-gradient(135deg,var(--olive),#7d784c);color:#fff;font-weight:900;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 12px 24px rgba(99,97,60,.25);margin-bottom:14px}
+.ai-generate:hover{transform:translateY(-2px)}
+.ai-generate:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.ai-result{display:none;padding:18px;border-radius:18px;background:rgba(34,122,78,.07);border:1px solid rgba(34,122,78,.18);margin-bottom:14px}
+.ai-result.active{display:block}
+.ai-result strong{display:block;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--olive);margin-bottom:10px}
+.ai-result p{line-height:1.78;color:#403832}
+.order-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.order-btn{display:inline-flex;align-items:center;justify-content:center;padding:16px;border-radius:18px;font-weight:900}
+.order-btn.primary{background:linear-gradient(135deg,var(--coral),var(--rose));color:#fff}
+.order-btn.secondary{background:#fff;border:1px solid rgba(16,16,16,.08)}
+.meta-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
+.meta-card{padding:15px 16px;border-radius:18px;background:#fff;border:1px solid rgba(16,16,16,.07)}
+.meta-card span{display:block;font-size:.72rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}
+.meta-card strong{font-size:.92rem}
+.hidden{display:none!important}
+/* custom cursor */
+.cursor-hat{position:fixed;left:0;top:0;z-index:9999;pointer-events:none;transform:translate(-50%,-50%) rotate(-12deg);filter:drop-shadow(0 6px 10px rgba(0,0,0,.18));opacity:0;transition:opacity .2s ease, transform .08s linear}
+.cursor-hat svg{width:56px;height:56px;display:block}
+.cursor-ring{position:fixed;left:0;top:0;z-index:9998;pointer-events:none;width:42px;height:42px;border-radius:50%;border:1.8px solid rgba(31,54,95,.35);transform:translate(-50%,-50%);opacity:0;transition:width .2s ease,height .2s ease,border-color .2s ease,opacity .2s ease}
+body.cursor-active .cursor-hat, body.cursor-active .cursor-ring{opacity:1}
+.hover-cursor .cursor-ring,.btn:hover ~ .cursor-ring{}
+@media (max-width:1120px){
+  .hero-inner,.about-grid,.video-grid,.collection-grid,.contact-grid,.detail-grid{grid-template-columns:1fr}
+  .hero-side{justify-self:start}
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .payment-grid,.verify-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:840px){
+  body,body a,body button{cursor:auto!important}
+  .cursor-hat,.cursor-ring{display:none!important}
+  .nav-links,.btn-lite{display:none}
+  .mobile-shop{display:inline-flex}
+  .hero{min-height:auto;border-radius:32px}
+  .hero-inner{padding:28px}
+  .hero-copy h1{font-size:2.95rem}
+  .hero-stats,.quick-grid,.side-shots,.product-grid,.payment-grid,.verify-grid,.contact-detail-grid,.persona-grid,.meta-grid,.order-actions,.footer-wrap,.view-page-card,.view-page-visuals{grid-template-columns:1fr}
+  .section-head{flex-direction:column;align-items:flex-start}
+  .panel,.collection-shell,.payment-wrap,.detail-info,.preview-shell{padding:22px}
+  .preview-stage{min-height:500px}
+}
+</style>
+</head>
+<body>
+<div class="cursor-hat" id="cursorHat" aria-hidden="true">
+  <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="capFront" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#fff7cf"/>
+        <stop offset="100%" stop-color="#f1cf27"/>
+      </linearGradient>
+      <linearGradient id="capBrim" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ef5b47"/>
+        <stop offset="100%" stop-color="#97273f"/>
+      </linearGradient>
+    </defs>
+    <ellipse cx="66" cy="83" rx="34" ry="10" fill="rgba(0,0,0,.14)"/>
+    <path d="M29 47c3-18 19-29 41-29 16 0 31 6 38 18 3 5 4 10 4 16v11H33V47z" fill="url(#capFront)" stroke="#121212" stroke-width="3"/>
+    <path d="M17 71c4-12 15-20 33-21h44c3 0 6 1 8 3-1 16-16 31-43 31-21 0-33-4-42-13z" fill="url(#capBrim)" stroke="#121212" stroke-width="3"/>
+    <path d="M48 26c8 7 12 18 12 36" stroke="#121212" stroke-width="3" fill="none" opacity=".7"/>
+    <path d="M95 38c7 3 13 12 15 24" stroke="#121212" stroke-width="3" fill="none" opacity=".7"/>
+    <circle cx="61" cy="18" r="4" fill="#121212"/>
+  </svg>
+</div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+<div class="nav-wrap">
+  <nav class="nav glass">
+    <a class="brand" href="#home">
+      <img src="logo.jpg" alt="NexGen logo">
+      <div class="brand-text">
+        <strong>NexGen</strong>
+        <span>Headgear x Digital Fusion</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#story">Brand Story</a></li>
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#payments">Payments</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="btn-lite" href="#collection">Shop Caps</a>
+      <a class="btn mobile-shop" href="#collection">Shop</a>
+    </div>
+  </nav>
+</div>
+
+<header class="hero" id="home">
+  <div class="grid-overlay"></div>
+  <div class="hero-inner">
+    <div class="hero-copy reveal-item">
+      <span class="kicker">New Collection • Verified Brand</span>
+      <h1>Where <em>Headgear energy</em>, NexGen visuals, and digital-market style meet.</h1>
+      <p>
+        This website blends the clean product vibe of Headgear, the animated premium motion language of Digital Nomad, and your bold NexGen poster identity into one storefront. It keeps the streetwear feel, adds business-grade credibility, and makes the collection look premium, modern, and ready to order.
+      </p>
+      <div class="hero-actions">
+        <a class="btn" href="#collection">Explore Collection</a>
+        <a class="btn-lite" href="#video">Watch Brand Video</a>
+        <span class="badge-verify">Verified Brand Elements</span>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>12+</strong><span>Featured cap drops</span></div>
+        <div class="stat"><strong>AI</strong><span>Preview combo mode</span></div>
+        <div class="stat"><strong>5</strong><span>Payment channels shown</span></div>
+        <div class="stat"><strong>Fast</strong><span>Social-first order flow</span></div>
+      </div>
+    </div>
+    <aside class="hero-side reveal-item">
+      <div class="feature-card">
+        <span class="feature-ribbon">Featured Drop</span>
+        <img src="cozy-black.jpg" alt="Cozy black cap poster">
+      </div>
+      <div class="hero-side-head">
+        <img src="logo.jpg" alt="NexGen brand logo">
+        <div>
+          <h3>NexGen Caps</h3>
+          <p>Crafting caps as unique as you</p>
+        </div>
+      </div>
+      <p class="desc">
+        Premium poster-style presentation, brand video support, limited stock storytelling, and a product detail interface with interactive color and persona preview.
+      </p>
+      <div class="quick-grid">
+        <div class="quick-item"><strong>Phone</strong><span>01309-632515</span></div>
+        <div class="quick-item"><strong>Page</strong><span>NexGen</span></div>
+        <div class="quick-item"><strong>Status</strong><span>Always open</span></div>
+        <div class="quick-item"><strong>Location</strong><span>Rampura, Dhaka</span></div>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<div class="marquee-wrap glass">
+  <div class="marquee-track" id="marqueeTrack"></div>
+</div>
+
+<section class="section" id="story">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="badge-verify">Brand Story Mixed Right</span>
+        <h2>Poster visuals outside. Smart commerce system inside.</h2>
+      </div>
+      <p>
+        The layout keeps your original campaign feel, then layers in structured sections inspired by premium e-commerce and animated landing pages. So the site feels fashionable, but still trustworthy and conversion-ready.
+      </p>
+    </div>
+    <div class="about-grid">
+      <div class="panel glass">
+        <p>
+          NexGen now gets a more elevated storefront direction: strong hero visuals, highlighted cap drops, motion-rich sections, a verified payment block, and product detail pages with an AI-style preview experience. That means your Facebook-based identity can now feel closer to a real modern cap brand website.
+        </p>
+        <div class="brand-points">
+          <div class="point"><strong>Headgear-Inspired Structure</strong><span>Cleaner storefront hierarchy, stronger product focus, and a trust-first shopping flow.</span></div>
+          <div class="point"><strong>Digital Nomad Motion DNA</strong><span>Floating marquee, glow, glass cards, hover movement, premium gradients, and smooth animated interactions.</span></div>
+          <div class="point"><strong>NexGen Visual Identity</strong><span>Your cap posters, logo, page snapshot, color palette, and campaign energy remain at the center.</span></div>
+        </div>
+      </div>
+      <div class="snapshot glass">
+        <img src="page-snapshot.png" alt="NexGen page snapshot">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="video">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="badge-verify">Media Layer</span>
+        <h2>Brand video and campaign visuals in one system.</h2>
+      </div>
+      <p>
+        Your current visual assets now work like a full campaign kit: promo poster, product grid, video reel, and studio cover images all connected to the same website experience.
+      </p>
+    </div>
+    <div class="video-grid">
+      <div class="panel glass">
+        <div class="video-frame">
+          <video controls poster="video-poster.jpg">
+            <source src="brand-video.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="panel glass">
+        <p>
+          This section is built for your short-form brand motion. Use it for Facebook, Instagram, or ad creatives while keeping the site visually consistent with your posters.
+        </p>
+        <div class="side-shots">
+          <div class="side-shot"><img src="studio-cover.jpg" alt="Studio cap cover"><span>Studio Campaign Cover</span></div>
+          <div class="side-shot"><img src="Screenshot 2026-04-01 075839.png" alt="Payment reference"><span>Payment Reference Visual</span></div>
+          <div class="side-shot"><img src="cozy-red.jpg" alt="Cozy red cap"><span>Sunset Promo Theme</span></div>
+          <div class="side-shot"><img src="limited-navy.jpg" alt="Limited navy cap"><span>Premium Limited Theme</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="collection">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="badge-verify">Collection Interface</span>
+        <h2>Browse drops like a real premium store.</h2>
+      </div>
+      <p>
+        These cards mix your poster style with product-focused browsing. Click any cap to open the full product interface, pick a color, choose a wearer type, and generate an AI-style visual preview inside the site.
+      </p>
+    </div>
+    <div class="collection-shell glass">
+      <div class="filter-row" id="filterRow">
+        <button class="filter-pill active" data-filter="all">All</button>
+        <button class="filter-pill" data-filter="cozy">Cozy Hat</button>
+        <button class="filter-pill" data-filter="limited">Limited</button>
+        <button class="filter-pill" data-filter="studio">Studio Visual</button>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="payments">
+  <div class="container">
+    <div class="payment-wrap glass">
+      <div class="payment-top">
+        <div>
+          <span class="badge-verify">Verified Payment Setup</span>
+          <h3>Professional payment presentation with trusted local and global gateways.</h3>
+        </div>
+        <p>Only the requested payment options are shown here. The section now uses the real payment logos with a clear SSLCommerz verification highlight, so the whole block looks cleaner, sharper, and more premium.</p>
+      </div>
+
+      <div class="payment-hero-card">
+        <div class="payment-brand-board">
+          <strong>Secure Checkout Feel</strong>
+          <h4>Trusted payment channels, arranged in a stronger branded layout.</h4>
+          <p>Your payment area now removes the old strip image and replaces it with a cleaner storefront block that highlights the core methods customers already recognize in Bangladesh.</p>
+          <div class="payment-mini-list">
+            <div class="payment-mini-item">bKash, Nagad and Upay for local checkout convenience</div>
+            <div class="payment-mini-item">Visa and Mastercard for broader payment support</div>
+            <div class="payment-mini-item">SSLCommerz shown as the trust and verification layer</div>
+          </div>
+        </div>
+
+        <div class="ssl-card">
+          <div class="ssl-card-inner">
+            <div class="ssl-badge-wrap">
+              <img src="1630596593457.jpg" alt="SSLCommerz verified">
+            </div>
+            <span class="badge-verify">Verified with SSLCommerz</span>
+            <h5>Secure gateway support</h5>
+            <p>Designed to look premium in both the payment section and footer while keeping the verification visual clear and easy to trust.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="payment-grid">
+        <div class="pay-chip"><img src="bkash-vector-logo-design-sreelogo.jpg" alt="bKash"><span>bKash</span></div>
+        <div class="pay-chip"><img src="Nagad-Logo.wine.png" alt="Nagad"><span>Nagad</span></div>
+        <div class="pay-chip"><img src="upay-logo-mobile-banking-app-icon-transparent-background-free-png.png" alt="Upay"><span>Upay</span></div>
+        <div class="pay-chip"><img src="unnamed.png" alt="Visa"><span>Visa</span></div>
+        <div class="pay-chip"><img src="images.png" alt="Mastercard"><span>Mastercard</span></div>
+      </div>
+
+      <div class="verify-grid">
+        <div class="verify-card"><strong>Verified Payment</strong><span>Real payment logos and SSLCommerz trust badge are now used directly in the interface.</span></div>
+        <div class="verify-card"><strong>Verified Products</strong><span>Collection uses your uploaded NexGen posters and cap visuals across the storefront.</span></div>
+        <div class="verify-card"><strong>Verified Contact</strong><span>Phone, page identity and order-oriented sections remain visible throughout the site.</span></div>
+        <div class="verify-card"><strong>Verified UI</strong><span>Custom cursor, hover motion, animated sections and premium glass styling are all preserved.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="view-page">
+  <div class="container">
+    <div class="view-page-card glass">
+      <div class="view-page-copy">
+        <span class="badge-verify">Page Showcase</span>
+        <h3>Studio visuals and mockup shots now support the page section too.</h3>
+        <p>
+          This block now gives the Facebook page area a more premium showcase feel with your uploaded studio visual and a storefront mockup preview side by side.
+        </p>
+        <div class="view-page-points">
+          <div>Studio-style cap visual added for stronger campaign mood</div>
+          <div>Website mockup preview added to make the section feel more complete</div>
+          <div>Direct Facebook page button kept for traffic and conversion flow</div>
+        </div>
+        <a class="view-page-btn" href="https://www.facebook.com/profile.php?id=61560593650652" target="_blank" rel="noopener noreferrer">View Page ↗</a>
+      </div>
+      <div class="view-page-visuals">
+        <div class="view-shot">
+          <img src="studio-cover.jpg" alt="NexGen studio visuals">
+          <span>Studio Visual</span>
+        </div>
+        <div class="view-shot">
+          <img src="page-snapshot.png" alt="NexGen website mockup">
+          <span>Website Mockup</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="panel glass contact-box">
+        <span class="badge-verify">Order + Contact</span>
+        <h2>Keep the page vibe, but upgrade the whole buying journey.</h2>
+        <p>
+          This site is structured so you can later plug in WhatsApp ordering, Facebook checkout links, product stock counts, and a full cart flow. For now, it already looks premium enough for showcase, social traffic, and direct order handling.
+        </p>
+        <div class="contact-detail-grid">
+          <div class="contact-chip"><span>Phone</span><strong>01309-632515</strong></div>
+          <div class="contact-chip"><span>Email</span><strong>nexgens623@gmail.com</strong></div>
+          <div class="contact-chip"><span>Facebook Page</span><strong>NexGen</strong></div>
+          <div class="contact-chip"><span>Address</span><strong>Banasree, Rampura, Dhaka, Bangladesh</strong></div>
+        </div>
+      </div>
+      <div class="cta-panel">
+        <span class="kicker">Limited Stock Energy</span>
+        <h3>New cap drop. Stronger brand presence. Cleaner order flow.</h3>
+        <p>Use this as your hero storefront, campaign landing page, or full product browsing website for NexGen.</p>
+        <div class="cta-actions">
+          <a href="#collection">Shop Collection</a>
+          <a href="#home">Back to Top</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="detail-page" id="detailSection">
+  <div class="container">
+    <button class="back-link" id="backToCollection">← Back to collection</button>
+    <div class="detail-grid">
+      <div class="sticky-panel">
+        <div class="preview-shell glass">
+          <div class="preview-stage" id="previewStage">
+            <div class="preview-base" id="basePreview"><img id="detailImage" src="" alt="Selected cap"></div>
+            <div class="ai-canvas-wrap" id="canvasWrap"><canvas id="aiPreviewCanvas" width="1000" height="1000"></canvas></div>
+            <div class="loading-overlay" id="loadingOverlay">
+              <div class="spinner"></div>
+              <strong>Generating fixed wearer preview</strong>
+              <span>Building a cleaner men, women, boys, or girls campaign composition.</span>
+            </div>
+            <div class="ai-tag" id="aiTag">Wearer preview ready</div>
+          </div>
+          <div class="preview-note">
+            The preview mode now builds a fixed campaign-style wearer composition for men, women, boys, and girls. The cap color stays synced with your selection, so each preview feels cleaner and more consistent across every style.
+          </div>
+        </div>
+      </div>
+      <div class="detail-info glass">
+        <span class="detail-category" id="detailCategory"></span>
+        <h1 id="detailTitle"></h1>
+        <div class="detail-price" id="detailPrice"></div>
+        <p class="detail-desc" id="detailDesc"></p>
+
+        <div class="option-group">
+          <div class="option-top"><strong>Choose Color</strong><span id="selectedColorLabel"></span></div>
+          <div class="color-row" id="colorRow"></div>
+        </div>
+
+        <div class="option-group">
+          <div class="option-top"><strong>Choose Wearer Style</strong><span id="selectedPersonaLabel"></span></div>
+          <div class="persona-grid" id="personaGrid"></div>
+        </div>
+
+        <div class="combo-box" id="comboBox">Pick a cap color and wearer type to build your styled preview.</div>
+        <button class="ai-generate" id="generateBtn">Generate AI-style cap preview</button>
+
+        <div class="ai-result" id="aiResult">
+          <strong>Preview Summary</strong>
+          <p id="aiResultText"></p>
+        </div>
+
+        <div class="order-actions">
+          <a class="order-btn primary" href="#contact">Order this design</a>
+          <a class="order-btn secondary" href="#payments">Payment options</a>
+        </div>
+
+        <div class="meta-grid">
+          <div class="meta-card"><span>Brand</span><strong>NexGen</strong></div>
+          <div class="meta-card"><span>Style</span><strong id="metaStyle">Poster-ready cap</strong></div>
+          <div class="meta-card"><span>Availability</span><strong>Limited social-first drop</strong></div>
+          <div class="meta-card"><span>Verified</span><strong>Visual, payment and brand block included</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-wrap glass">
+    <div>
+      <div class="footer-brand">
+        <img src="logo.jpg" alt="NexGen logo">
+        <div>
+          <h4>NexGen</h4>
+          <p>Crafting caps as unique as you. This fusion website mixes Headgear-style commerce, Digital Nomad-style motion, and your original NexGen campaign identity.</p>
+        </div>
+      </div>
+      <div class="footer-badges">
+        <span class="badge-verify">Verified Brand</span>
+        <span class="badge-verify">Verified Payment UI</span>
+      </div>
+      <div class="footer-payment-icons">
+        <div class="footer-payment-icon"><img src="bkash-vector-logo-design-sreelogo.jpg" alt="bKash"></div>
+        <div class="footer-payment-icon"><img src="Nagad-Logo.wine.png" alt="Nagad"></div>
+        <div class="footer-payment-icon"><img src="upay-logo-mobile-banking-app-icon-transparent-background-free-png.png" alt="Upay"></div>
+        <div class="footer-payment-icon"><img src="unnamed.png" alt="Visa"></div>
+        <div class="footer-payment-icon"><img src="images.png" alt="Mastercard"></div>
+        <div class="footer-payment-icon"><img src="1630596593457.jpg" alt="SSLCommerz verified"></div>
+      </div>
+      <div class="footer-small">Verified with SSLCommerz • Supported payments: bKash, Nagad, Upay, Visa and Mastercard.</div>
+    </div>
+    <div class="footer-col">
+      <strong>Quick Links</strong>
+      <p>
+        <a href="#home">Home</a><br>
+        <a href="#story">Brand Story</a><br>
+        <a href="#video">Brand Video</a><br>
+        <a href="#collection">Collection</a><br>
+        <a href="#payments">Payments</a><br>
+        <a href="#view-page">View Page</a><br>
+        <a href="#contact">Contact</a>
+      </p>
+    </div>
+    <div class="footer-col">
+      <strong>Direct Info</strong>
+      <p>Phone: 01309-632515<br>Email: nexgens623@gmail.com<br>Page: NexGen<br>Dhaka, Bangladesh</p>
+    </div>
+  </div>
+  <div class="footer-note">NexGen Headgear Fusion • Updated with all uploaded cap posters, synced color options, fixed wearer previews, real payment logos, SSLCommerz verification, logo, page snapshot, and brand video.</div>
+</footer>
+
+<script>
+const products = [
+  {
+    id:'cozy-black', category:'cozy', categoryLabel:'Cozy Hat Collection', title:'Cozy Hat • Black Night', price:'BDT 690', desc:'Classic black-and-white trucker cap with the strongest sunset poster contrast.', image:'cozy-black.jpg', style:'Street trucker cap',
+    colors:[
+      {name:'Black', hex:'#121212', image:'cozy-black.jpg', theme:'night glow'},
+      {name:'Brown', hex:'#6f4c3d', image:'cozy-brown.jpg', theme:'golden dusk'},
+      {name:'Olive', hex:'#4f5430', image:'cozy-olive.jpg', theme:'olive dusk'},
+      {name:'Pink', hex:'#d97c9d', image:'cozy-pink.jpg', theme:'rose sunset'},
+      {name:'Red', hex:'#d03436', image:'cozy-red.jpg', theme:'city blaze'},
+      {name:'Silver', hex:'#9aa1a8', image:'cozy-silver.jpg', theme:'cool light'},
+      {name:'Yellow', hex:'#e5cf38', image:'cozy-yellow.jpg', theme:'sunburst'}
+    ]
+  },
+  {
+    id:'cozy-brown', category:'cozy', categoryLabel:'Cozy Hat Collection', title:'Cozy Hat • Brown Dusk', price:'BDT 690', desc:'Warm brown trucker cap with softer poster energy and an earthy streetwear tone.', image:'cozy-brown.jpg', style:'Earth-tone trucker cap',
+    colors:[
+      {name:'Brown', hex:'#6f4c3d', image:'cozy-brown.jpg', theme:'golden dusk'},
+      {name:'Black', hex:'#121212', image:'cozy-black.jpg', theme:'night glow'},
+      {name:'Olive', hex:'#4f5430', image:'cozy-olive.jpg', theme:'olive dusk'},
+      {name:'Pink', hex:'#d97c9d', image:'cozy-pink.jpg', theme:'rose sunset'},
+      {name:'Red', hex:'#d03436', image:'cozy-red.jpg', theme:'city blaze'},
+      {name:'Silver', hex:'#9aa1a8', image:'cozy-silver.jpg', theme:'cool light'},
+      {name:'Yellow', hex:'#e5cf38', image:'cozy-yellow.jpg', theme:'sunburst'}
+    ]
+  },
+  {
+    id:'cozy-olive', category:'cozy', categoryLabel:'Cozy Hat Collection', title:'Cozy Hat • Olive Street', price:'BDT 690', desc:'Muted olive trucker cap for a more rugged and premium casual look.', image:'cozy-olive.jpg', style:'Olive trucker cap',
+    colors:[
+      {name:'Olive', hex:'#4f5430', image:'cozy-olive.jpg', theme:'olive dusk'},
+      {name:'Black', hex:'#121212', image:'cozy-black.jpg', theme:'night glow'},
+      {name:'Brown', hex:'#6f4c3d', image:'cozy-brown.jpg', theme:'golden dusk'},
+      {name:'Pink', hex:'#d97c9d', image:'cozy-pink.jpg', theme:'rose sunset'},
+      {name:'Red', hex:'#d03436', image:'cozy-red.jpg', theme:'city blaze'},
+      {name:'Silver', hex:'#9aa1a8', image:'cozy-silver.jpg', theme:'cool light'},
+      {name:'Yellow', hex:'#e5cf38', image:'cozy-yellow.jpg', theme:'sunburst'}
+    ]
+  },
+  {
+    id:'cozy-pink', category:'cozy', categoryLabel:'Cozy Hat Collection', title:'Cozy Hat • Pink Pop', price:'BDT 690', desc:'Soft pink trucker cap with a playful feminine campaign look.', image:'cozy-pink.jpg', style:'Soft pop trucker cap',
+    colors:[
+      {name:'Pink', hex:'#d97c9d', image:'cozy-pink.jpg', theme:'rose sunset'},
+      {name:'Black', hex:'#121212', image:'cozy-black.jpg', theme:'night glow'},
+      {name:'Brown', hex:'#6f4c3d', image:'cozy-brown.jpg', theme:'golden dusk'},
+      {name:'Olive', hex:'#4f5430', image:'cozy-olive.jpg', theme:'olive dusk'},
+      {name:'Red', hex:'#d03436', image:'cozy-red.jpg', theme:'city blaze'},
+      {name:'Silver', hex:'#9aa1a8', image:'cozy-silver.jpg', theme:'cool light'},
+      {name:'Yellow', hex:'#e5cf38', image:'cozy-yellow.jpg', theme:'sunburst'}
+    ]
+  },
+  {
+    id:'cozy-red', category:'cozy', categoryLabel:'Cozy Hat Collection', title:'Cozy Hat • Red Signal', price:'BDT 690', desc:'Bold red-on-black trucker cap for louder street campaigns and standout promotions.', image:'cozy-red.jpg', style:'High-contrast trucker cap',
+    colors:[
+      {name:'Red', hex:'#d03436', image:'cozy-red.jpg', theme:'city blaze'},
+      {name:'Black', hex:'#121212', image:'cozy-black.jpg', theme:'night glow'},
+      {name:'Brown', hex:'#6f4c3d', image:'cozy-brown.jpg', theme:'golden dusk'},
+      {name:'Olive', hex:'#4f5430', image:'cozy-olive.jpg', theme:'olive dusk'},
+      {name:'Pink', hex:'#d97c9d', image:'cozy-pink.jpg', theme:'rose sunset'},
+      {name:'Silver', hex:'#9aa1a8', image:'cozy-silver.jpg', theme:'cool light'},
+      {name:'Yellow', hex:'#e5cf38', image:'cozy-yellow.jpg', theme:'sunburst'}
+    ]
+  },
+  {
+    id:'cozy-silver', category:'cozy', categoryLabel:'Cozy Hat Collection', title:'Cozy Hat • Silver Frost', price:'BDT 690', desc:'Clean silver-grey trucker cap with a polished, modern visual balance.', image:'cozy-silver.jpg', style:'Mono trucker cap',
+    colors:[
+      {name:'Silver', hex:'#9aa1a8', image:'cozy-silver.jpg', theme:'cool light'},
+      {name:'Black', hex:'#121212', image:'cozy-black.jpg', theme:'night glow'},
+      {name:'Brown', hex:'#6f4c3d', image:'cozy-brown.jpg', theme:'golden dusk'},
+      {name:'Olive', hex:'#4f5430', image:'cozy-olive.jpg', theme:'olive dusk'},
+      {name:'Pink', hex:'#d97c9d', image:'cozy-pink.jpg', theme:'rose sunset'},
+      {name:'Red', hex:'#d03436', image:'cozy-red.jpg', theme:'city blaze'},
+      {name:'Yellow', hex:'#e5cf38', image:'cozy-yellow.jpg', theme:'sunburst'}
+    ]
+  },
+  {
+    id:'cozy-yellow', category:'cozy', categoryLabel:'Cozy Hat Collection', title:'Cozy Hat • Yellow Pop', price:'BDT 690', desc:'Bright yellow trucker cap for the most playful, high-visibility campaign mood.', image:'cozy-yellow.jpg', style:'Sunburst trucker cap',
+    colors:[
+      {name:'Yellow', hex:'#e5cf38', image:'cozy-yellow.jpg', theme:'sunburst'},
+      {name:'Black', hex:'#121212', image:'cozy-black.jpg', theme:'night glow'},
+      {name:'Brown', hex:'#6f4c3d', image:'cozy-brown.jpg', theme:'golden dusk'},
+      {name:'Olive', hex:'#4f5430', image:'cozy-olive.jpg', theme:'olive dusk'},
+      {name:'Pink', hex:'#d97c9d', image:'cozy-pink.jpg', theme:'rose sunset'},
+      {name:'Red', hex:'#d03436', image:'cozy-red.jpg', theme:'city blaze'},
+      {name:'Silver', hex:'#9aa1a8', image:'cozy-silver.jpg', theme:'cool light'}
+    ]
+  },
+  {
+    id:'limited-blush', category:'limited', categoryLabel:'Limited Collection', title:'Limited • Blush Light', price:'BDT 750', desc:'Soft pink premium solid cap with a lighter upscale editorial mood.', image:'limited-blush.jpg', style:'Premium solid cap',
+    colors:[
+      {name:'Blush', hex:'#ebcbd4', image:'limited-blush.jpg', theme:'rose premium'},
+      {name:'Green', hex:'#465739', image:'limited-green.jpg', theme:'forest luxe'},
+      {name:'Maroon', hex:'#6f223b', image:'limited-maroon.jpg', theme:'deep wine'},
+      {name:'Navy', hex:'#1b315f', image:'limited-navy.jpg', theme:'night luxe'},
+      {name:'Night', hex:'#0f1736', image:'limited-night.jpg', theme:'midnight core'}
+    ]
+  },
+  {
+    id:'limited-green', category:'limited', categoryLabel:'Limited Collection', title:'Limited • Deep Green', price:'BDT 750', desc:'Stronger fashion-forward cap with rich dark green presence and premium minimal feel.', image:'limited-green.jpg', style:'Forest premium cap',
+    colors:[
+      {name:'Green', hex:'#465739', image:'limited-green.jpg', theme:'forest luxe'},
+      {name:'Blush', hex:'#ebcbd4', image:'limited-blush.jpg', theme:'rose premium'},
+      {name:'Maroon', hex:'#6f223b', image:'limited-maroon.jpg', theme:'deep wine'},
+      {name:'Navy', hex:'#1b315f', image:'limited-navy.jpg', theme:'night luxe'},
+      {name:'Night', hex:'#0f1736', image:'limited-night.jpg', theme:'midnight core'}
+    ]
+  },
+  {
+    id:'limited-maroon', category:'limited', categoryLabel:'Limited Collection', title:'Limited • Maroon Deep', price:'BDT 750', desc:'Dark maroon premium cap designed for richer, more exclusive visual storytelling.', image:'limited-maroon.jpg', style:'Wine premium cap',
+    colors:[
+      {name:'Maroon', hex:'#6f223b', image:'limited-maroon.jpg', theme:'deep wine'},
+      {name:'Blush', hex:'#ebcbd4', image:'limited-blush.jpg', theme:'rose premium'},
+      {name:'Green', hex:'#465739', image:'limited-green.jpg', theme:'forest luxe'},
+      {name:'Navy', hex:'#1b315f', image:'limited-navy.jpg', theme:'night luxe'},
+      {name:'Night', hex:'#0f1736', image:'limited-night.jpg', theme:'midnight core'}
+    ]
+  },
+  {
+    id:'limited-navy', category:'limited', categoryLabel:'Limited Collection', title:'Limited • Navy Core', price:'BDT 750', desc:'Classic navy premium cap with a clean minimal profile and modern dress-up appeal.', image:'limited-navy.jpg', style:'Navy premium cap',
+    colors:[
+      {name:'Navy', hex:'#1b315f', image:'limited-navy.jpg', theme:'night luxe'},
+      {name:'Blush', hex:'#ebcbd4', image:'limited-blush.jpg', theme:'rose premium'},
+      {name:'Green', hex:'#465739', image:'limited-green.jpg', theme:'forest luxe'},
+      {name:'Maroon', hex:'#6f223b', image:'limited-maroon.jpg', theme:'deep wine'},
+      {name:'Night', hex:'#0f1736', image:'limited-night.jpg', theme:'midnight core'}
+    ]
+  },
+  {
+    id:'limited-night', category:'limited', categoryLabel:'Limited Collection', title:'Limited • Midnight Dark', price:'BDT 750', desc:'The deepest dark premium cap option for sharp understated luxury and cleaner everyday wear.', image:'limited-night.jpg', style:'Midnight premium cap',
+    colors:[
+      {name:'Night', hex:'#0f1736', image:'limited-night.jpg', theme:'midnight core'},
+      {name:'Blush', hex:'#ebcbd4', image:'limited-blush.jpg', theme:'rose premium'},
+      {name:'Green', hex:'#465739', image:'limited-green.jpg', theme:'forest luxe'},
+      {name:'Maroon', hex:'#6f223b', image:'limited-maroon.jpg', theme:'deep wine'},
+      {name:'Navy', hex:'#1b315f', image:'limited-navy.jpg', theme:'night luxe'}
+    ]
+  },
+  {
+    id:'studio-sport', category:'studio', categoryLabel:'Studio Visual Collection', title:'Studio Visual • Sport Light', price:'BDT 790', desc:'Bright campaign-style studio cap visual using your uploaded blue studio image for a sporty editorial storefront look.', image:'studio-blue.jpg', style:'Studio campaign cap',
+    colors:[
+      {name:'Sky Blue', hex:'#7cb3ff', image:'studio-blue.jpg', theme:'sport light'}
+    ]
+  },
+  {
+    id:'studio-pop', category:'studio', categoryLabel:'Studio Visual Collection', title:'Studio Visual • Pop Red', price:'BDT 790', desc:'A punchy red studio scene that makes the collection feel more like a premium launch campaign inside the store.', image:'studio-red.jpg', style:'Poster-style cap visual',
+    colors:[
+      {name:'Pop Red', hex:'#e63333', image:'studio-red.jpg', theme:'pop red'}
+    ]
+  },
+  {
+    id:'studio-mono', category:'studio', categoryLabel:'Studio Visual Collection', title:'Studio Visual • Mono Contrast', price:'BDT 790', desc:'Clean black and white cap mockup styling for a sharper premium gallery feel inside the collection section.', image:'studio-mono.jpg', style:'Mono studio cap visual',
+    colors:[
+      {name:'Mono', hex:'#111111', image:'studio-mono.jpg', theme:'mono contrast'}
+    ]
+  }
+];
+
+const personas = [
+  {id:'men', label:'Men', icon:'🧢', scene:'streetwear men campaign'},
+  {id:'women', label:'Women', icon:'✨', scene:'fashion women campaign'},
+  {id:'boys', label:'Boys', icon:'⭐', scene:'kids boys campaign'},
+  {id:'girls', label:'Girls', icon:'🌸', scene:'kids girls campaign'}
+];
+let currentFilter = 'all';
+let currentProduct = null;
+let selectedColor = null;
+let selectedPersona = null;
+const productGrid = document.getElementById('productGrid');
+const filterButtons = [...document.querySelectorAll('.filter-pill')];
+const detailSection = document.getElementById('detailSection');
+const detailImage = document.getElementById('detailImage');
+const detailCategory = document.getElementById('detailCategory');
+const detailTitle = document.getElementById('detailTitle');
+const detailPrice = document.getElementById('detailPrice');
+const detailDesc = document.getElementById('detailDesc');
+const selectedColorLabel = document.getElementById('selectedColorLabel');
+const selectedPersonaLabel = document.getElementById('selectedPersonaLabel');
+const colorRow = document.getElementById('colorRow');
+const personaGrid = document.getElementById('personaGrid');
+const comboBox = document.getElementById('comboBox');
+const generateBtn = document.getElementById('generateBtn');
+const aiResult = document.getElementById('aiResult');
+const aiResultText = document.getElementById('aiResultText');
+const canvasWrap = document.getElementById('canvasWrap');
+const aiCanvas = document.getElementById('aiPreviewCanvas');
+const aiTag = document.getElementById('aiTag');
+const loadingOverlay = document.getElementById('loadingOverlay');
+const basePreview = document.getElementById('basePreview');
+const metaStyle = document.getElementById('metaStyle');
+function buildMarquee(){
+  const track = document.getElementById('marqueeTrack');
+  const items = [
+    'Cozy Hat <b>New Drop</b>',
+    'Limited Series <b>Premium Feel</b>',
+    'AI Preview <b>Interactive Combo</b>',
+    'Verified Payment <b>5 Methods</b>',
+    'NexGen Visuals <b>Poster Driven</b>',
+    'Headgear Energy <b>Storefront Ready</b>'
+  ];
+  const finalItems = [...items, ...items];
+  track.innerHTML = finalItems.map(item => `<div class="marquee-item">◆ ${item}</div>`).join('');
+}
+function renderProducts(){
+  const filtered = currentFilter === 'all' ? products : products.filter(p => p.category === currentFilter);
+  productGrid.innerHTML = filtered.map(p => {
+    const swatches = p.colors.slice(0,7).map(color => `<span class="tiny-swatch" style="background:${color.hex}" title="${color.name}"></span>`).join('');
+    return `
+    <article class="product-card reveal-item">
+      <div class="product-media">
+        <span class="card-badge ${p.category}">${p.categoryLabel}</span>
+        <img src="${p.image}" alt="${p.title}">
+      </div>
+      <div class="product-body">
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+        <div class="swatch-row"><strong>${p.colors.length} colors</strong><div class="tiny-swatches">${swatches}</div></div>
+        <div class="product-meta">
+          <div class="product-price">${p.price}</div>
+          <span class="badge-verify">Verified</span>
+        </div>
+        <div class="card-actions">
+          <button class="mini-btn primary" data-open="${p.id}">View details</button>
+          <a class="mini-btn" href="#payments">Payments</a>
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+  document.querySelectorAll('[data-open]').forEach(btn => btn.addEventListener('click', () => openDetail(btn.dataset.open)));
+}
+filterButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderProducts();
+  });
+});
+function openDetail(id){
+  currentProduct = products.find(p => p.id === id);
+  if(!currentProduct) return;
+  selectedColor = currentProduct.colors[0];
+  selectedPersona = personas[0];
+  detailCategory.textContent = currentProduct.categoryLabel;
+  detailTitle.textContent = currentProduct.title;
+  detailPrice.textContent = currentProduct.price;
+  detailDesc.textContent = currentProduct.desc;
+  detailImage.src = selectedColor.image;
+  detailImage.alt = currentProduct.title;
+  metaStyle.textContent = currentProduct.style;
+  renderColorOptions();
+  renderPersonaOptions();
+  syncSelections();
+  canvasWrap.classList.remove('active');
+  aiTag.classList.remove('active');
+  basePreview.classList.remove('hidden');
+  aiResult.classList.remove('active');
+  detailSection.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function renderColorOptions(){
+  colorRow.innerHTML = currentProduct.colors.map(color => `
+    <button class="color-dot ${selectedColor.name === color.name ? 'active' : ''}" style="background:${color.hex}" aria-label="${color.name}" data-color="${color.name}"></button>
+  `).join('');
+  colorRow.querySelectorAll('[data-color]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedColor = currentProduct.colors.find(c => c.name === btn.dataset.color);
+      detailImage.src = selectedColor.image;
+      renderColorOptions();
+      syncSelections();
+      resetAIView();
+    });
+  });
+}
+function renderPersonaOptions(){
+  personaGrid.innerHTML = personas.map(persona => `
+    <button class="persona-btn ${selectedPersona.id === persona.id ? 'active' : ''}" data-persona="${persona.id}">
+      <div class="icon">${persona.icon}</div>
+      <div class="label">${persona.label}</div>
+    </button>
+  `).join('');
+  personaGrid.querySelectorAll('[data-persona]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      selectedPersona = personas.find(p => p.id === btn.dataset.persona);
+      renderPersonaOptions();
+      syncSelections();
+      resetAIView();
+    });
+  });
+}
+function syncSelections(){
+  selectedColorLabel.textContent = selectedColor ? selectedColor.name : 'Not selected';
+  selectedPersonaLabel.textContent = selectedPersona ? selectedPersona.label : 'Not selected';
+  comboBox.textContent = `${currentProduct.title} • ${selectedColor.name} • ${selectedPersona.label} mood`;
+  generateBtn.disabled = !(selectedColor && selectedPersona);
+}
+function resetAIView(){
+  aiTag.classList.remove('active');
+  aiResult.classList.remove('active');
+  canvasWrap.classList.remove('active');
+  basePreview.classList.remove('hidden');
+}
+function shadeColor(hex, percent){
+  const num = parseInt(hex.replace('#',''),16);
+  let r = (num >> 16), g = (num >> 8) & 255, b = num & 255;
+  r = Math.min(255, Math.max(0, Math.round(r + (255-r)*percent)));
+  g = Math.min(255, Math.max(0, Math.round(g + (255-g)*percent)));
+  b = Math.min(255, Math.max(0, Math.round(b + (255-b)*percent)));
+  return `rgb(${r}, ${g}, ${b})`;
+}
+function darken(hex, percent){
+  const num = parseInt(hex.replace('#',''),16);
+  let r = (num >> 16), g = (num >> 8) & 255, b = num & 255;
+  r = Math.max(0, Math.round(r*(1-percent)));
+  g = Math.max(0, Math.round(g*(1-percent)));
+  b = Math.max(0, Math.round(b*(1-percent)));
+  return `rgb(${r}, ${g}, ${b})`;
+}
+function roundedRect(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);
+  ctx.arcTo(x,y,x+w,y,r);
+  ctx.closePath();
+}
+function drawCap(ctx, x, y, scale, hex, meshStyle){
+  const front = shadeColor(hex, 0.08);
+  const brim = darken(hex, 0.18);
+  const mesh = meshStyle === 'solid' ? darken(hex, 0.08) : darken(hex, 0.28);
+  ctx.save();
+  ctx.translate(x,y);
+  ctx.scale(scale, scale);
+  ctx.rotate(-0.08);
+  ctx.shadowColor = 'rgba(0,0,0,.14)';
+  ctx.shadowBlur = 18;
+  ctx.fillStyle = 'rgba(0,0,0,.1)';
+  ctx.beginPath();
+  ctx.ellipse(18,56,58,12,0,0,Math.PI*2);
+  ctx.fill();
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = front;
+  ctx.strokeStyle = 'rgba(30,30,30,.18)';
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(-40,8);
+  ctx.bezierCurveTo(-30,-28,30,-34,64,-6);
+  ctx.bezierCurveTo(76,4,78,18,76,30);
+  ctx.lineTo(-32,30);
+  ctx.bezierCurveTo(-42,26,-46,18,-40,8);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = mesh;
+  ctx.beginPath();
+  ctx.moveTo(45,-8);
+  ctx.bezierCurveTo(72,-4,88,14,86,34);
+  ctx.lineTo(74,35);
+  ctx.bezierCurveTo(72,20,64,5,45,-8);
+  ctx.closePath();
+  ctx.fill();
+  if(meshStyle !== 'solid'){
+    ctx.strokeStyle = 'rgba(255,255,255,.22)';
+    ctx.lineWidth = 1;
+    for(let i=48;i<84;i+=6){ ctx.beginPath(); ctx.moveTo(i,-6); ctx.lineTo(i+8,34); ctx.stroke(); }
+    for(let j=-2;j<34;j+=6){ ctx.beginPath(); ctx.moveTo(46,j); ctx.lineTo(84,j+4); ctx.stroke(); }
+  }
+  ctx.fillStyle = brim;
+  ctx.beginPath();
+  ctx.moveTo(-60,34);
+  ctx.quadraticCurveTo(-18,20,30,32);
+  ctx.quadraticCurveTo(0,62,-55,56);
+  ctx.quadraticCurveTo(-78,48,-60,34);
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(20,20,20,.16)';
+  ctx.lineWidth = 1.5;
+  for(let s=0;s<4;s++){
+    ctx.beginPath();
+    ctx.moveTo(-47+s*2,40+s*3);
+    ctx.quadraticCurveTo(-10,30+s*2,14,38+s*2);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+function drawPersonaScene(ctx, persona, hex){
+  const w = aiCanvas.width, h = aiCanvas.height;
+  const cfg = {
+    men:{skin:'#d8a47b', hair:'#1d1d1f', shirt:'#202733', accent:'#c8ccd6', label:'MEN'},
+    women:{skin:'#f0c5a3', hair:'#5a2c37', shirt:'#f2dbe6', accent:'#b14f74', label:'WOMEN'},
+    boys:{skin:'#d7a06e', hair:'#47311f', shirt:'#b6d7ff', accent:'#326ca8', label:'KIDS'},
+    girls:{skin:'#f1c0aa', hair:'#6b3d4b', shirt:'#ffe4ef', accent:'#d86d98', label:'KIDS'}
+  }[persona.id];
+  const bg = ctx.createLinearGradient(0,0,w,0);
+  if(selectedColor.theme.includes('night')){ bg.addColorStop(0,'#24395f'); bg.addColorStop(1,'#f59b3a'); }
+  else if(selectedColor.theme.includes('rose') || selectedColor.theme.includes('wine')){ bg.addColorStop(0,'#7e2846'); bg.addColorStop(1,'#f6a6b8'); }
+  else if(selectedColor.theme.includes('forest') || selectedColor.theme.includes('olive')){ bg.addColorStop(0,'#5f6339'); bg.addColorStop(1,'#f0c15d'); }
+  else if(selectedColor.theme.includes('cool')){ bg.addColorStop(0,'#7f94a3'); bg.addColorStop(1,'#edd29b'); }
+  else { bg.addColorStop(0,'#e9b63a'); bg.addColorStop(1,'#ef7f57'); }
+  ctx.fillStyle = bg;
+  ctx.fillRect(0,0,w,370);
+  ctx.globalAlpha = .16;
+  ctx.fillStyle = '#fff';
+  for(let i=0;i<9;i++){
+    const bw = 56 + (i%3)*18;
+    const bh = 120 + (i%4)*60;
+    const x = 40 + i*105;
+    ctx.fillRect(x, 250-bh, bw, bh);
+  }
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = '#fbf7f0';
+  ctx.beginPath();
+  ctx.arc(w/2, 690, 560, Math.PI, 2*Math.PI);
+  ctx.fill();
+  ctx.lineWidth = 18;
+  ctx.strokeStyle = selectedColor.hex;
+  ctx.stroke();
+  ctx.fillStyle = 'rgba(0,0,0,.08)';
+  ctx.beginPath();
+  ctx.ellipse(500, 880, 220, 42, 0, 0, Math.PI*2);
+  ctx.fill();
+  ctx.fillStyle = cfg.shirt;
+  roundedRect(ctx, 300, 550, 400, 260, 120); ctx.fill();
+  ctx.fillStyle = shadeColor(cfg.shirt, .12);
+  roundedRect(ctx, 430, 520, 140, 90, 40); ctx.fill();
+  ctx.fillStyle = cfg.skin;
+  roundedRect(ctx, 450, 430, 100, 90, 26); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(500, 340, 150, 175, 0, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(353, 344, 22, 34, 0, 0, Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(647, 344, 22, 34, 0, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = cfg.hair;
+  if(persona.id === 'men' || persona.id === 'boys'){
+    ctx.beginPath();
+    ctx.moveTo(355,320); ctx.quadraticCurveTo(400,155,520,155); ctx.quadraticCurveTo(625,160,645,280); ctx.lineTo(645,310); ctx.quadraticCurveTo(615,260,560,245); ctx.quadraticCurveTo(430,230,355,320); ctx.closePath();
+    ctx.fill();
+  } else {
+    ctx.beginPath();
+    ctx.moveTo(340,340); ctx.quadraticCurveTo(355,120,515,140); ctx.quadraticCurveTo(665,155,660,360); ctx.quadraticCurveTo(648,520,590,590); ctx.lineTo(595,420); ctx.quadraticCurveTo(560,470,500,470); ctx.quadraticCurveTo(442,470,405,425); ctx.lineTo(408,590); ctx.quadraticCurveTo(352,518,340,340); ctx.closePath();
+    ctx.fill();
+  }
+  ctx.strokeStyle = '#4d3528'; ctx.lineWidth = 5; ctx.lineCap = 'round';
+  ctx.beginPath(); ctx.moveTo(438,350); ctx.quadraticCurveTo(466,338,492,350); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(508,350); ctx.quadraticCurveTo(534,338,562,350); ctx.stroke();
+  ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.moveTo(435,324); ctx.lineTo(488,314); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(512,314); ctx.lineTo(565,324); ctx.stroke();
+  ctx.strokeStyle = 'rgba(88,58,44,.32)'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(500,360); ctx.quadraticCurveTo(493,405,504,428); ctx.stroke();
+  ctx.strokeStyle = '#8c4d56'; ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.moveTo(455,458); ctx.quadraticCurveTo(500,486,545,458); ctx.stroke();
+  ctx.fillStyle = cfg.accent; ctx.globalAlpha = .18;
+  roundedRect(ctx, 285, 620, 430, 200, 110); ctx.fill(); ctx.globalAlpha = 1;
+  drawCap(ctx, 495, 250, 2.0, hex, currentProduct.category === 'limited' ? 'solid' : 'mesh');
+  ctx.textAlign = 'center';
+  ctx.font = '700 48px Rajdhani'; ctx.fillStyle = '#ffffff';
+  ctx.fillText('AI WEARER PREVIEW', w/2, 82);
+  ctx.font = '800 108px Rajdhani';
+  ctx.fillStyle = selectedColor.theme.includes('sunburst') ? '#111111' : '#ffffff';
+  ctx.fillText(cfg.label, w/2, 170);
+  ctx.textAlign = 'left';
+  ctx.font = '700 34px Exo 2'; ctx.fillStyle = '#1d1713';
+  ctx.fillText(`${selectedColor.name} • ${currentProduct.categoryLabel}`, 72, 940);
+  ctx.font = '600 26px Exo 2'; ctx.fillStyle = '#6d6358';
+  ctx.fillText(`Styled for ${persona.label} with a fixed campaign composition`, 72, 980);
+}
+function drawStyledPreview(){
+  const ctx = aiCanvas.getContext('2d');
+  ctx.clearRect(0,0,aiCanvas.width,aiCanvas.height);
+  drawPersonaScene(ctx, selectedPersona, selectedColor.hex);
+  loadingOverlay.classList.remove('active');
+  canvasWrap.classList.add('active');
+  basePreview.classList.add('hidden');
+  aiTag.classList.add('active');
+  aiResult.classList.add('active');
+  aiResultText.textContent = `Generated fixed wearer preview: ${selectedPersona.label} wearing the ${selectedColor.name} version of ${currentProduct.title}. The cap stays color-synced and placed in the same clean campaign layout for every style selection.`;
+}
+
+generateBtn.addEventListener('click', () => {
+  if(!currentProduct || !selectedColor || !selectedPersona) return;
+  loadingOverlay.classList.add('active');
+  aiTag.classList.remove('active');
+  setTimeout(drawStyledPreview, 900);
+});
+document.getElementById('backToCollection').addEventListener('click', () => {
+  document.getElementById('collection').scrollIntoView({behavior:'smooth'});
+});
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', event => {
+    const targetId = link.getAttribute('href');
+    if(!targetId || targetId === '#') return;
+    const target = document.querySelector(targetId);
+    if(!target) return;
+    event.preventDefault();
+    target.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+renderProducts();
+buildMarquee();
+openDetail(products[0].id);
+// custom cursor
+if(window.matchMedia('(pointer:fine)').matches){
+  document.body.classList.add('cursor-active');
+  const hat = document.getElementById('cursorHat');
+  const ring = document.getElementById('cursorRing');
+  let mx = window.innerWidth/2, my = window.innerHeight/2, rx = mx, ry = my;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animateCursor(){
+    rx += (mx-rx)*0.18;
+    ry += (my-ry)*0.18;
+    hat.style.left = `${mx}px`;
+    hat.style.top = `${my}px`;
+    ring.style.left = `${rx}px`;
+    ring.style.top = `${ry}px`;
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+  document.querySelectorAll('a,button,.product-card,.pay-chip,.panel,.hero-side,.quick-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.style.width = '64px';
+      ring.style.height = '64px';
+      ring.style.borderColor = 'rgba(239,91,71,.55)';
+      hat.style.transform = 'translate(-50%,-50%) rotate(-6deg) scale(1.12)';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.width = '42px';
+      ring.style.height = '42px';
+      ring.style.borderColor = 'rgba(31,54,95,.35)';
+      hat.style.transform = 'translate(-50%,-50%) rotate(-12deg) scale(1)';
+    });
+  });
+}
+</script>
+</body>
+</html>
